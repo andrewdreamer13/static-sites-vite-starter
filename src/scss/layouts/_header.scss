@@ -1,0 +1,10 @@
+@use "../tools" as t;
+
+.header {
+  background-color: var(--theme-bg);
+  
+  &__inner {
+    width: 100%;
+    @include t.flex-mix(space-between, center,row,20px);
+  }
+}

@@ -1,0 +1,20 @@
+@use "../tools" as t;
+
+
+
+body {
+  // 1. Сначала общие настройки (шрифты, база), которые не зависят от темы
+  font-family: t.$font-main, t.$font-alt; 
+  font-size: t.$fs-base;
+  font-weight: t.$fw-reg;
+  line-height: 1.5; // Хороший тон для читаемости
+
+  // 2. Включаем светлую тему по умолчанию
+  @include t.apply-theme(t.$light-theme);
+
+  // 3. Включаем темную тему по условию (через класс)
+  &.dark-mode {
+    @include t.apply-theme(t.$dark-theme);
+  }
+}
+

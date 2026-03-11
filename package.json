@@ -9,6 +9,17 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "vite": "^7.3.1"
+    "autoprefixer": "^10.4.27",
+    "postcss-sort-media-queries": "^6.1.0",
+    "sass": "^1.97.3",
+    "vite": "^7.3.1",
+    "vite-plugin-html-inject": "^1.1.2",
+    "vite-plugin-imagemin": "^0.6.1",
+    "vite-plugin-svg-icons": "^2.0.1",
+    "vite-plugin-zip-pack": "^1.2.4"
+  },
+  "dependencies": {
+    "gsap": "^3.14.2",
+    "swiper": "^12.1.2"
   }
 }

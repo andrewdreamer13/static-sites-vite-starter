@@ -1,0 +1,40 @@
+@use "sass:map";
+
+// 1. ШРИФТЫ (Константы)
+$font-main: 'Fira-Sans', sans-serif;
+$font-alt: 'Arial', sans-serif;
+
+$fw-light: 300;
+$fw-reg: 400;
+$fw-medium: 500;
+$fw-bold: 700;
+
+$fs-base: 16px;
+
+// 2. СЕТКА И СЛОИ (Не зависят от цвета)
+$space-xs: 4px;
+$space-sm: 8px;
+$space-md: 16px;
+$space-lg: 24px;
+$space-xl: 48px;
+
+$z-negative: -1;
+$z-base: 1;
+$z-header: 100;
+
+// 3. СТАТУСЫ (Универсальные)
+$clr-error: #ff4d4d;
+$clr-success: #2ecc71;
+
+// 4. ТЕМЫ (Твой новый пульт управления)
+$light-theme: (
+  "bg": #3b3737,
+  "text": #1316ca,  // Темный для светлого фона
+  "accent": #4AF6CD // Твой яркий бренд-цвет
+);
+
+$dark-theme: (
+  "bg": #171919,    // Твой старый $bg-main теперь тут
+  "text": #ffffff,  // Белый для темного фона
+  "accent": #4AF6CD 
+);

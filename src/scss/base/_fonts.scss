@@ -1,0 +1,8 @@
+@use "../tools" as t;
+
+@include t.font-face("Fira-Sans", "../fonts/FiraSans-ExtraBold", 800, normal);
+@include t.font-face("Fira-Sans", "../fonts/FiraSans-Bold", 700, normal);
+@include t.font-face("Fira-Sans", "../fonts/FiraSans-Medium", 500, normal);
+@include t.font-face("Fira-Sans", "../fonts/FiraSans-Regular", 400, normal);
+@include t.font-face("Fira-Sans", "../fonts/FiraSans-Light", 300, normal);
+@include t.font-face("Fira-Sans", "../fonts/FiraSans-Thin", 100, normal);

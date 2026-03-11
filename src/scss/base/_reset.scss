@@ -1,0 +1,203 @@
+@charset "UTF-8";
+
+
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* Используем динамические единицы для мобилок */
+  min-height: 100dvh;
+  margin: 0;
+  scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+}
+
+body {
+  min-height: 100dvh;
+  margin: 0;
+  line-height: 1.3;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* 3. Сброс отступов (улучшенная логика) */
+:where(h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote, figure, fieldset) {
+  margin: 0;
+}
+
+:where(ul, ol)[class] {
+  list-style: none;
+  padding: 0;
+}
+
+/* 4. Медиа (картинки не должны быть инлайновыми) */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+//* 5. Формы */
+// input,
+// textarea,
+// select {
+//   font: inherit;
+//   color: inherit;
+//  appearance: none;
+//   border: none;
+//   outline: none;
+//   box-shadow: none; /* Убирает ту самую синюю тень в Chrome */
+//   background-color: transparent;
+//   -webkit-tap-highlight-color: transparent;
+// }
+
+// input:focus,
+// button:focus,
+// textarea:focus {
+//   outline: none;
+//   border: 1px solid transparent; 
+
+// }
+
+// input:focus-visible,
+// button:focus-visible,
+// textarea:focus-visible {
+//   outline: 2px solid currentColor;
+//   outline-offset: 2px;
+// }
+
+/* 1. Сначала полностью гасим outline для всех при обычном фокусе */
+// :focus {
+//   outline: none !important;
+// }
+
+/* 2. Для ссылок и кнопок можно оставить :focus-visible как было */
+// a:focus-visible,
+// button:focus-visible {
+//   outline: 2px solid currentColor !important;
+//   outline-offset: 2px;
+// }
+
+/* 3. А для ИНПУТОВ — самый хитрый способ. 
+   Мы говорим: если фокус пришел НЕ от мыши (а от клавиатуры) */
+// input:focus-visible {
+//   outline: 2px solid currentColor !important;
+//   outline-offset: 2px;
+// }
+
+/* 4. "Костыль" для Chrome, чтобы он не считал клик по инпуту поводом для обводки */
+// input:active {
+//   outline: none !important;
+// }
+
+/* 5. Тотальный сброс форм */
+input,
+textarea,
+button,
+select {
+  /* Убираем все системные рамки и тени */
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  outline: 0;
+  box-shadow: none;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  
+  /* Убираем синюю вспышку на мобилках */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 1. Глобальный запрет на аутлайны при клике (фокусе) */
+:focus {
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
+/* 2. Трюк для Chrome: убираем ту самую черную рамку, 
+   которую он вешает на "автозаполнение" или "активное состояние" */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* 3. Включаем обводку ТОЛЬКО при навигации ТАБОМ */
+/* Добавляем селектор :focus-visible отдельно для надежности */
+*:focus-visible {
+  outline: 2px solid currentColor !important;
+  outline-offset: 2px !important;
+}
+
+::placeholder {
+  color: inherit;
+  font: inherit;
+  opacity: 0.5;
+}
+
+/* Удобно для кнопок, но не ломает чекбоксы */
+:where(button, [type="button"], [type="submit"], [type="reset"]) {
+  appearance: none;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+
+/* Фикс для fieldset, чтобы он не распирал родителя по ширине */
+fieldset {
+  min-inline-size: 0;
+}
+
+/* Убираем "желтизну" автозаполнения в Chrome */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: currentColor;
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Убираем стандартный аутлайн только если есть focus-visible */
+// :focus:not(:focus-visible) {
+//   outline: none;
+// }
+
+// :focus-visible {
+//   outline: 2px solid currentColor;
+//   outline-offset: 2px;
+// }
+
+/* 7. Ссылки */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* 8. Таблицы */
+table {
+  border-collapse: collapse;
+}
+
+/* 9. Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
