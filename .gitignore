@@ -22,3 +22,13 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+#Zip archives of the assembly
+*.zip
+
+# Vite cache
+.vite
+
+# Secret keys
+.env
+.env.*
+!.env.example

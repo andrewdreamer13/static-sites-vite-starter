@@ -1,6 +1,23 @@
-
 import "../scss/main.scss";
+
 import "virtual:svg-icons-register";
 
+import gsap from "gsap";
+import Swiper from "swiper";
+import { Navigation, Pagination } from "swiper/modules";
 
-console.log("Starter is ready and running!");
+import "swiper/css";
+import "swiper/css/navigation";
+
+import { initBurger } from "./components/burger.js";
+import { initSliders } from "./modules/sliders.js";
+import { initAppearance } from "./animations/appearance.js";
+
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("Женька сообщает: Сборка готова, Andrew! 🚀");
+
+  initBurger();
+  initSliders();
+
+  initAppearance();
+});

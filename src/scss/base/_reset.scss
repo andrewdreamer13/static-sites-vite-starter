@@ -11,27 +11,24 @@
 :root {
   /* Enables native dark/light mode UI elements */
   color-scheme: light dark;
-  /* Keeps layout stable when scrollbars appear */
   scrollbar-gutter: stable;
 }
 
 html {
-  /* Dynamic units for mobile viewports (addresses address bar issues) */
   min-height: 100dvh;
   min-height: 100vh;
-  scroll-behavior: smooth;
   margin: 0;
+  scroll-behavior: smooth;
 }
 
 body {
   min-height: 100dvh;
-   min-height: 100vh;
+  min-height: 100vh;
   margin: 0;
-  line-height: 1.5; /* Balanced vertical rhythm */
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  /* Prevents horizontal overflow from long words or links */
   overflow-wrap: break-word;
 }
 
@@ -41,7 +38,22 @@ body {
 }
 
 /* 3. Zero Specificity Reset (using :where to allow effortless overrides) */
-:where(body, h1, h2, h3, h4, h5, h6, p, ul, ol, dl, blockquote, figure, fieldset) {
+:where(
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  ul,
+  ol,
+  dl,
+  blockquote,
+  figure,
+  fieldset
+) {
   margin: 0;
 }
 
@@ -64,8 +76,8 @@ body {
 }
 
 :where(a) {
-  text-decoration: none;
   color: inherit;
+  text-decoration: none;
 }
 
 /* 4. Media & SVG Logic */
@@ -95,48 +107,50 @@ svg {
 
 /* Optimize transition performance for icon hover states */
 svg.icon {
-  transition-property: fill, stroke;
-  transition: fill .15s ease, stroke .15s ease;
-   will-change: fill, stroke;
-
-
+  transition:
+    fill 0.15s ease,
+    stroke 0.15s ease;
+  will-change: fill, stroke;
 }
 
 /* 5. Forms & Interactive Elements (Refined) */
 
 :where(input, textarea, button, select) {
-  font: inherit;
   color: inherit;
+  font: inherit;
   letter-spacing: inherit;
   word-spacing: inherit;
 }
 
-/* Сброс для текстовых полей и селектов */
+/* Reset for text fields and selects */
 :where(input:not([type="checkbox"], [type="radio"]), textarea, select) {
   appearance: none;
-  background-color: transparent;
-  border: 1px solid transparent; /* Резервируем место под границу, чтобы верстка не прыгала */
+  border: 1px solid transparent;
   border-radius: 0;
+  background-color: transparent;
 }
 
-/* Кнопки — убираем дефолтный серый фон и рамки */
 :where(button, [type="button"], [type="submit"], [type="reset"]) {
   appearance: none;
-  background: none;
-  border: none;
   padding: 0;
+  border: none;
+  background: none;
   cursor: pointer;
 }
 
-/* Фикс для Safari: убираем скругления в инпутах */
-:where(input[type="text"], input[type="email"], input[type="search"], textarea) {
+/* Safari Fix: Removes rounding in inputs*/
+:where(
+  input[type="text"],
+  input[type="email"],
+  input[type="search"],
+  textarea
+) {
   appearance: none;
 }
 
-/* textarea: запрещаем горизонтальное изменение размера, чтобы не ломать сетку */
 textarea {
+  min-height: 3lh;
   resize: vertical;
-  min-height: 3lh; /* Используем современные единицы высоты строки */
 }
 
 /* Mobile tap highlight reset */
@@ -146,21 +160,20 @@ label {
   -webkit-tap-highlight-color: transparent;
 }
 
-
 /* 6. Accessibility: Focus States */
 
-/* Устанавливаем базовый стиль фокуса только для клавиатурного ввода */
+/* Set the default focus style for keyboard input only */
 :where(:focus-visible) {
   outline: 2px solid currentColor;
   outline-offset: 2px;
 }
 
-/* Скрываем стандартный фокус при клике мышкой (если браузер сам не справился) */
+/* Hide the default focus when you click the mouse */
 :where(:focus:not(:focus-visible)) {
   outline: none;
 }
 
-/* Для Safari и старых браузеров, которые плохо дружат с :focus-visible на кнопках */
+/*For Safari and older browsers that don't work well with :focus-visible on buttons*/
 :where(button:focus) {
   cursor: pointer;
 }
@@ -182,11 +195,13 @@ input:-webkit-autofill:focus {
 
 /* 8. Accessibility: Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
-  *, ::before, ::after {
+  *,
+  ::before,
+  ::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
@@ -198,4 +213,3 @@ input:-webkit-autofill:focus {
 table {
   border-collapse: collapse;
 }
-
