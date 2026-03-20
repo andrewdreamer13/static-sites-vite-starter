@@ -84,34 +84,12 @@ body {
 img,
 picture,
 video,
-canvas,
-svg {
+canvas {
   display: block;
   max-width: 100%;
   height: auto;
 }
 
-/* Smart SVG handling for sprites and icons */
-svg {
-  fill: currentColor;
-}
-
-/* Only apply currentColor if the element doesn't use gradients (url) or none */
-:where(svg [fill]:not([fill="none"], [fill^="url"])) {
-  fill: currentColor;
-}
-
-:where(svg [stroke]:not([stroke="none"], [stroke^="url"])) {
-  stroke: currentColor;
-}
-
-/* Optimize transition performance for icon hover states */
-svg.icon {
-  transition:
-    fill 0.15s ease,
-    stroke 0.15s ease;
-  will-change: fill, stroke;
-}
 
 /* 5. Forms & Interactive Elements (Refined) */
 
