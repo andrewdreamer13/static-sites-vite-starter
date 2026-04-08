@@ -13,6 +13,7 @@ import { initBurger } from "./components/burger.js";
 import { initSliders } from "./modules/sliders.js";
 import { initAppearance } from "./animations/appearance.js";
 import { changeTheme } from "./components/changeTheme.js";
+import { openModalWindow } from "./components/modal.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   console.log("The project works");
@@ -20,6 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initBurger();
   initSliders();
   changeTheme();
-
+  openModalWindow();
   initAppearance();
 });
