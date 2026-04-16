@@ -1,6 +1,5 @@
 @use "../tools" as t;
 
-
 :root {
   @include t.generate-theme(t.$light-theme);
 
@@ -9,30 +8,27 @@
   }
 }
 
-
-
 body {
-   font-family: t.$font-main, t.$font-alt; 
-  font-size: t.$fs-base;
-  font-weight: t.$fw-reg;
   background-color: var(--clr-bg);
   color: var(--clr-text);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  font-weight: t.$fw-reg;
+  font-size: t.$fs-base;
+  font-family: t.$font-main, t.$font-alt;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 .card {
-  margin: 0 auto;
   width: 250px;
+  margin: 0 auto;
   padding: 10px;
-  background-color: var(--clr-surface);
   border: 1px solid var(--clr-border);
+  background-color: var(--clr-surface);
 }
 
 .btn-primary {
   background-color: var(--clr-accent);
   color: var(--clr-text);
-
 }
-
-
 
