@@ -14,6 +14,44 @@ A professional, modular starter kit for building high-performance static website
 - **Performance First**: Optimized for speed and high Lighthouse scores right out of the box.
 - **Clean Git History**: Pre-configured `.gitignore` and `.gitkeep` files to maintain project structure without bloat.
 
+
+🛠 Pre-configured Modules
+The starter comes with several pre-built JavaScript modules to speed up development:
+
+1. Lazy SVG Loader
+Path: src/js/modules/lazySvgLoader.js
+
+An efficient engine for inlining SVG icons without polluting the HTML source or duplicating IDs.
+
+Library File: src/html/inline-icons/inline-icons-templates.html (contains all SVG <template> blocks).
+
+Usage: Add data-svg-receiver and data-svg-id="template-id" to any element.
+
+2. Advanced Burger Menu
+Path: src/js/main.js (initBurger)
+
+A robust, accessible navigation logic for mobile devices.
+
+Features: Body scroll locking, ESC key support, and backdrop interaction.
+
+Styles: Fully responsive implementation in src/scss/components/_burger.scss.
+
+3. Reusable Modal System
+A flexible, trigger-based system for handling popups and overlays.
+
+Logic: Supports multiple modal windows with unique content templates.
+
+Accessibility: Focus trapping and backdrop interactions are handled out of the box.
+
+4. Theme Management System
+A lightweight, persistent theme switcher (Dark/Light mode).
+
+Persistence: Saves preference to localStorage.
+
+System Sync: Automatically respects the user's OS color scheme.
+
+Implementation: Toggles a global .dark-theme class on the <html> element.
+
 ## 📁 Project Structure
 
 To use the automated asset pipeline, follow this folder structure:
@@ -22,6 +60,7 @@ To use the automated asset pipeline, follow this folder structure:
 - `src/assets/fonts/raw/` — Put your `.ttf` or `.woff2` fonts here. They will be processed into `src/assets/fonts/woff2/`.
 - `src/assets/icons/` — SVG files placed here are automatically combined into an **SVG Sprite**.
 - `src/html/inline-icons/` — Place SVGs here if you intend to inject them directly into your HTML code.
+- `src/html/inline-icons/inline-icons-templates.html` — file with SVG templates. Injected into index.html with <load>
 
 ## 📁 SCSS Structure
 
