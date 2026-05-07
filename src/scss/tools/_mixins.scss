@@ -55,6 +55,19 @@
   );
 }
 
+// Clamp for all units of measurement
+
+@mixin fluid-range($prop, $min, $max, $min-width: 320px, $max-width: 768px) {
+  #{$prop}: clamp(
+    #{$min},
+    calc(
+      #{$min} + (#{f.strip-unit($max - $min)}) *
+        ((100vw - #{$min-width}) / #{f.strip-unit($max-width - $min-width)})
+    ),
+    #{$max}
+  );
+}
+
 // mixin line clamp
 
 @mixin line-clamp($lines: 2) {
