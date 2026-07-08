@@ -1,6 +1,5 @@
 export function openModalWindow() {
   const modal = document.querySelector("#modal");
-  console.log(modal);
   
   const openButtons = document.querySelectorAll("[data-modal]");
  

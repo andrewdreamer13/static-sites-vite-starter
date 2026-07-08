@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -23,14 +22,17 @@
     />
     <title>static-sites-vite-starter</title>
     <script>
-  // Surgical precision: instant theme installation
-  (function() {
-    const savedTheme = localStorage.getItem('theme');
-    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    const theme = savedTheme || systemTheme;
-    document.documentElement.setAttribute('data-theme', theme);
-  })();
-</script>
+      // Surgical precision: instant theme installation
+      (function () {
+        const savedTheme = localStorage.getItem("theme");
+        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
+          .matches
+          ? "dark"
+          : "light";
+        const theme = savedTheme || systemTheme;
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+    </script>
   </head>
   <body>
     <!-- the way to use vite-plugin-html-inject -->
@@ -53,24 +55,60 @@
           height="770"
         />
       </picture>
+
+       <load src="/src/html/components/accordion.html" />
     </main>
     <!-- the way to use vite-plugin-html-inject -->
-     <load src="/src/html/components/modal.html" />
+    <load src="/src/html/components/modal.html" />
     <load src="/src/html/layout/footer.html" />
 
     <div class="card">
       <h2 class="card__title">Card title</h2>
       <p class="card__text">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam sequi ipsa ex libero dicta fugit, similique molestiae officia omnis iste?
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quisquam sequi
+        ipsa ex libero dicta fugit, similique molestiae officia omnis iste?
       </p>
     </div>
-    <!-- html code for lazySvgLoader -->
-     <div class="icon-wrapper" data-svg-receiver data-svg-id="vent"></div>
-     <div class="icon-wrapper" data-svg-receiver data-svg-id="vent"></div>
-     <div class="icon-wrapper" data-svg-receiver data-svg-id="vent"></div>
-     
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque amet laboriosam voluptates alias quidem sed, ab quos architecto! Itaque veritatis, incidunt provident maiores quo totam quos aliquid earum nam sed, saepe ipsum iure ea corrupti iusto blanditiis similique cupiditate excepturi. Enim fuga vero tenetur odit distinctio qui nemo reprehenderit ullam blanditiis quis delectus dolore accusantium exercitationem, dolor praesentium natus? Ratione dolorum sapiente obcaecati inventore quo modi vero. Consequatur aperiam libero soluta fuga ullam voluptate delectus deleniti laborum numquam repellendus, esse quae. Laborum fugit optio, quo deleniti id in, dignissimos unde quos ipsum nam ducimus sunt quibusdam? Minima nostrum animi ipsa.</p>
-      <load src="/src/html/inline-icons/inline-icons-templates.html" />
+    <!-- html code for lazySvgLoader with templates -->
+    <div
+      class="icon-wrapper"
+      data-svg-receiver
+      data-svg-id="vent"
+    ></div>
+    <div
+      class="icon-wrapper"
+      data-svg-receiver
+      data-svg-id="vent"
+    ></div>
+    <div
+      class="icon-wrapper"
+      data-svg-receiver
+      data-svg-id="vent"
+    ></div>
+
+    <!-- html code for lazySvgLoader with fetch -->
+
+    <div
+      class="icon-wrapper"
+      data-svg-receiver
+      data-svg-id="vent"
+      data-svg-src="/src/html/inline-icons/vent.html"
+    ></div>
+
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque amet
+      laboriosam voluptates alias quidem sed, ab quos architecto! Itaque
+      veritatis, incidunt provident maiores quo totam quos aliquid earum nam
+      sed, saepe ipsum iure ea corrupti iusto blanditiis similique cupiditate
+      excepturi. Enim fuga vero tenetur odit distinctio qui nemo reprehenderit
+      ullam blanditiis quis delectus dolore accusantium exercitationem, dolor
+      praesentium natus? Ratione dolorum sapiente obcaecati inventore quo modi
+      vero. Consequatur aperiam libero soluta fuga ullam voluptate delectus
+      deleniti laborum numquam repellendus, esse quae. Laborum fugit optio, quo
+      deleniti id in, dignissimos unde quos ipsum nam ducimus sunt quibusdam?
+      Minima nostrum animi ipsa.
+    </p>
+    <load src="/src/html/inline-icons/inline-icons-templates.html" />
     <script
       type="module"
       src="/src/js/main.js"

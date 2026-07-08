@@ -9,19 +9,21 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 import { initBurger } from "./components/burger.js";
-import { initSliders } from "./modules/sliders.js";
+// import { initSlider } from "./components/slider.js";
 import { initAppearance } from "./animations/appearance.js";
-import { changeTheme } from "./components/changeTheme.js";
+import { initThemeSwitcher } from "./components/themeSwitcher.js";
 import { openModalWindow } from "./components/modal.js";
-import { initLazySvg } from "./modules/lazySvgLoader.js";
+import { initLazySvg } from "./services/lazySvgLoader.js";
+import { initAccordion } from "./components/accordion.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   console.log("The project works");
 
   initBurger();
-  initSliders();
-  changeTheme();
+  // initSlider();
+  initThemeSwitcher();
   openModalWindow();
   initAppearance();
   initLazySvg();
+  initAccordion("#faq");
 });
