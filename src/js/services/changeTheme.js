@@ -1,5 +1,5 @@
-export function changeTheme() {
-  const changeThemeBtn = document.querySelector("#theme");
+export function initChangeTheme(buttonSelector) {
+  const changeThemeBtn = document.querySelector(buttonSelector);
   if (!changeThemeBtn) return;
 
   changeThemeBtn.addEventListener("click", () => {

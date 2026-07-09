@@ -22,7 +22,7 @@
     />
     <title>static-sites-vite-starter</title>
     <script>
-      // Surgical precision: instant theme installation
+      
       (function () {
         const savedTheme = localStorage.getItem("theme");
         const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
@@ -61,6 +61,8 @@
     <!-- the way to use vite-plugin-html-inject -->
     <load src="/src/html/components/modal-content1.html" />
     <load src="/src/html/components/modal-content2.html" />
+    <load src="/src/html/components/preloader.html" />
+
     <load src="/src/html/layout/footer.html" />
 
     <div class="card">

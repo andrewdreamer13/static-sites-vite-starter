@@ -12,8 +12,6 @@ export const initAccordion = (accordionId) => {
     const content = item.querySelector(".accordion__content");
     const isExpanded = button.getAttribute("aria-expanded") === "true";
 
-    // Close all accordion items
-
     items.forEach((item) => {
       item
         .querySelector(".accordion__button")
@@ -21,8 +19,6 @@ export const initAccordion = (accordionId) => {
 
       item.querySelector(".accordion__content").style.maxHeight = null;
     });
-
-    // Open current accordion item
 
     if (!isExpanded) {
       button.setAttribute("aria-expanded", "true");
