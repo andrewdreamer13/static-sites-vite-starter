@@ -1,45 +1,62 @@
-export const initBurger = (btnSelector, menuSelector) => {
+import { openScope, closeScope } from "../services/focusManager.js";
+
+export const initBurger = (btnSelector, menuSelector, listSelector) => {
   const burger = document.querySelector(btnSelector);
   const menu = document.querySelector(menuSelector);
-  const list = menu ? menu.querySelector(".nav__list") : null;
-  const body = document.body;
 
   if (!burger || !menu) return;
+
+  const list = menu.querySelector(listSelector);
+  const body = document.body;
+  const isMenuOpen = () => menu.classList.contains("is-open");
+
+  const handleEscapeKey = (e) => {
+    if (e.key === "Escape" && isMenuOpen()) {
+      closeMenu();
+    }
+  };
+
+  const openMenu = () => {
+    burger.classList.add("is-active");
+    menu.classList.add("is-open");
+    body.classList.add("menu-open");
+
+    burger.setAttribute("aria-expanded", "true");
+    burger.setAttribute("aria-label", "Close menu");
+
+    document.addEventListener("keydown", handleEscapeKey);
+    openScope(menu);
+  };
 
   const closeMenu = () => {
     burger.classList.remove("is-active");
     menu.classList.remove("is-open");
     body.classList.remove("menu-open");
-    burger.setAttribute("aria-expanded", false);
+
+    burger.setAttribute("aria-expanded", "false");
+    burger.setAttribute("aria-label", "Open menu");
+
+    document.removeEventListener("keydown", handleEscapeKey);
+    closeScope();
   };
 
   const toggleMenu = () => {
-    const isOpened = menu.classList.contains("is-open");
-    burger.classList.toggle("is-active");
-    menu.classList.toggle("is-open");
-    body.classList.toggle("menu-open");
-    burger.setAttribute("aria-expanded", !isOpened);
+    if (isMenuOpen()) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
   };
 
   burger.addEventListener("click", toggleMenu);
 
   menu.addEventListener("click", (e) => {
-    if (e.target.closest("a") || e.target.closest("button")) {
+    if (e.target.closest("a")) {
       setTimeout(closeMenu, 300);
       return;
     }
-  });
 
-  if (list) {
-    list.addEventListener("click", (e) => {
-      if (e.target === list) {
-        closeMenu();
-      }
-    });
-  }
-
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && menu.classList.contains("is-open")) {
+    if (list && e.target === list) {
       closeMenu();
     }
   });

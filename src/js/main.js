@@ -12,18 +12,20 @@ import { initBurger } from "./components/burger.js";
 // import { initSlider } from "./components/slider.js";
 import { initAppearance } from "./animations/appearance.js";
 import { initThemeSwitcher } from "./components/themeSwitcher.js";
-import { openModalWindow } from "./components/modal.js";
+import { initModal } from "./components/modal.js";
 import { initLazySvg } from "./services/lazySvgLoader.js";
 import { initAccordion } from "./components/accordion.js";
+import { initFocusManager } from "./services/focusManager.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   console.log("The project works");
 
-  initBurger();
+  initBurger("#burger", ".nav", ".nav__list");
   // initSlider();
   initThemeSwitcher();
-  openModalWindow();
+  initModal();
   initAppearance();
   initLazySvg();
   initAccordion("#faq");
+  initFocusManager();
 });

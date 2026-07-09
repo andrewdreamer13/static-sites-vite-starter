@@ -1,43 +1,68 @@
-export function openModalWindow() {
-  const modal = document.querySelector("#modal");
-  
-  const openButtons = document.querySelectorAll("[data-modal]");
- 
-  
+import { openScope, closeScope } from "../services/focusManager.js";
 
-  const closeAll = () => {
-    modal.classList.remove("modal--visible");
-    document.body.classList.remove("lock");
+export const initModal = () => {
+  const openButtons = document.querySelectorAll("[data-modal-open]");
 
-    document.querySelectorAll("[data-modal-target]").forEach((target) => {
-      target.classList.remove("modal__content--visible");
-    });
+  if (!openButtons.length) return;
+
+  const body = document.body;
+  let activeModal = null;
+
+  const openModal = (modal) => {
+    if (!modal) return;
+
+    const content = modal.querySelector(".modal__content");
+
+    modal.classList.add("modal--visible");
+    content.classList.add("modal__content--visible");
+    modal.setAttribute("aria-hidden", "false");
+    body.classList.add("lock");
+
+    activeModal = modal;
+    openScope(modal);
+  };
+
+  const closeModal = () => {
+    if (!activeModal) return;
+
+    const content = activeModal.querySelector(".modal__content");
+
+    activeModal.classList.remove("modal--visible");
+    content.classList.remove("modal__content--visible");
+    activeModal.setAttribute("aria-hidden", "true");
+    body.classList.remove("lock");
+
+    closeScope();
+    activeModal = null;
   };
 
   openButtons.forEach((button) => {
-    button.addEventListener("click", (event) => {
-      const path = event.currentTarget.getAttribute("data-modal");
-      const targetContent = document.querySelector(
-        `[data-modal-target="${path}"]`,
-      );
+    button.addEventListener("click", () => {
+      const modal = document.getElementById(button.dataset.modalOpen);
 
-      if (targetContent) {
-        modal.classList.add("modal--visible");
-        targetContent.classList.add("modal__content--visible");
-        document.body.classList.add("lock");
+      if (!modal) return;
+
+      if (activeModal) {
+        closeModal();
+      }
+
+      setTimeout(() => {
+        openModal(modal);
+      }, 0);
+    });
+  });
+
+  document.querySelectorAll(".modal").forEach((modal) => {
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal || e.target.closest(".modal__close-btn")) {
+        closeModal();
       }
     });
   });
 
-  modal.addEventListener("click", (e) => {
-    if (e.target.closest(".modal__close-btn") || e.target === modal) {
-      closeAll();
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && activeModal) {
+      closeModal();
     }
   });
-
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modal.classList.contains("modal--visible")) {
-      closeAll();
-    }
-  });
-}
+};
