@@ -1,10 +1,11 @@
-export const initUpButton = () => {
-  const upButton = document.querySelector(".footer__up-button");
-  if (!upButton) return;
+export const initUpButton = (buttonSelector) => {
+  const button = document.querySelector(buttonSelector);
+  if (!button) return;
 
-  upButton.addEventListener("click", () => {
+  button.addEventListener("click", () => {
     window.scrollTo({
       top: 0,
+      behavior: "smooth",
     });
   });
 };

@@ -17,16 +17,19 @@ import { initModal } from "./components/modal.js";
 import { initLazySvg } from "./services/lazySvgLoader.js";
 import { initAccordion } from "./components/accordion.js";
 import { initFocusManager } from "./services/focusManager.js";
+// import {initUpButton} from "./components/upButton/js";
+import {initSlider} from "./components/slider.js"
 
 document.addEventListener("DOMContentLoaded", () => {
   console.log("The project works");
   initPreloader();
   initBurger("#burger", ".nav", ".nav__list");
-  // initSlider();
+   initSlider();
   initChangeTheme('#theme');
   initModal();
   initAppearance();
   initLazySvg();
   initAccordion("#faq");
   initFocusManager();
+  // initUpButton(".footer__up-button");
 });
