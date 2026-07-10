@@ -10,7 +10,6 @@ import "swiper/css/navigation";
 
 import {initPreloader} from "./components/preloader.js"
 import { initBurger } from "./components/burger.js";
-// import { initSlider } from "./components/slider.js";
 import { initAppearance } from "./animations/appearance.js";
 import { initChangeTheme } from "./services/changeTheme.js";
 import { initModal } from "./components/modal.js";
@@ -18,18 +17,20 @@ import { initLazySvg } from "./services/lazySvgLoader.js";
 import { initAccordion } from "./components/accordion.js";
 import { initFocusManager } from "./services/focusManager.js";
 // import {initUpButton} from "./components/upButton/js";
-import {initSlider} from "./components/slider.js"
+import {initSliders} from "./components/sliders.js"
+import { initTabs } from "./components/tabs.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   console.log("The project works");
   initPreloader();
   initBurger("#burger", ".nav", ".nav__list");
-   initSlider();
+   initSliders();
   initChangeTheme('#theme');
   initModal();
   initAppearance();
   initLazySvg();
   initAccordion("#faq");
   initFocusManager();
+  initTabs('#tabs-1');
   // initUpButton(".footer__up-button");
 });
