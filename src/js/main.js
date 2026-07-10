@@ -19,6 +19,7 @@ import { initFocusManager } from "./services/focusManager.js";
 // import {initUpButton} from "./components/upButton/js";
 import {initSliders} from "./components/sliders.js"
 import { initTabs } from "./components/tabs.js";
+import { initCookieBanner } from "./components/cookieBanner.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   console.log("The project works");
@@ -32,5 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initAccordion("#faq");
   initFocusManager();
   initTabs('#tabs-1');
+  initCookieBanner();
   // initUpButton(".footer__up-button");
 });
