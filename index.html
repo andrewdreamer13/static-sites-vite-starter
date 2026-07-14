@@ -22,7 +22,6 @@
     />
     <title>static-sites-vite-starter</title>
     <script>
-      
       (function () {
         const savedTheme = localStorage.getItem("theme");
         const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
@@ -56,10 +55,13 @@
         />
       </picture>
 
-       <load src="/src/html/components/accordion.html" />
-       <load src="/src/html/components/main-slider.html" />
-       <load src="/src/html/components/tabs.html" />
-       <load src="/src/html/components/form.html" id="form1" />
+      <load src="/src/html/components/accordion.html" />
+      <load src="/src/html/components/main-slider.html" />
+      <load src="/src/html/components/tabs.html" />
+      <load
+        src="/src/html/components/form.html"
+        id="form1"
+      />
     </main>
     <!-- the way to use vite-plugin-html-inject -->
     <load src="/src/html/components/modal-content1.html" />
@@ -94,6 +96,8 @@
       data-svg-id="vent"
     ></div>
 
+   
+
     <!-- html code for lazySvgLoader with fetch -->
 
     <div
@@ -104,7 +108,6 @@
     ></div>
 
    
-    <load src="/src/html/inline-icons/inline-icons-templates.html" />
     <script
       type="module"
       src="/src/js/main.js"

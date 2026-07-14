@@ -16,7 +16,7 @@ import { initBurger } from "./components/burger.js";
 import { initAppearance } from "./animations/appearance.js";
 import { initChangeTheme } from "./services/changeTheme.js";
 import { initModal } from "./components/modalManager.js";
-import { initLazySvg } from "./services/lazySvgLoader.js";
+ import { initLazySvg } from "./services/lazySvgLoader.js";
 import { initAccordion } from "./components/accordion.js";
 import { initFocusManager } from "./services/focusManager.js";
 // import {initUpButton} from "./components/upButton/js";
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initChangeTheme("#theme");
   initModal();
   initAppearance();
-  initLazySvg();
+  // initLazySvg();
   initAccordion("#faq");
   initFocusManager();
   initTabs("#tabs-1");
@@ -43,4 +43,18 @@ document.addEventListener("DOMContentLoaded", () => {
   initCustomSelect("#countries", optionsData.countries);
   initFormHandler("#form1");
   // initUpButton(".footer__up-button");
+
+
+(async () => {
+  try {
+    await import("./services/svgTemplates.js");
+    initLazySvg();
+  } catch (error) {
+    console.error("SVG template lazy-loading error:", error);
+    initLazySvg();
+  }
+})();
+
+
+
 });
