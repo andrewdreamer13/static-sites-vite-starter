@@ -1,0 +1,246 @@
+import { phoneMasks } from "../data/phoneMasks.js";
+import { openModal } from "../components/modalManager.js";
+
+const errorMessages = {
+  empty: "This field is required",
+  shortName: "Name must be at least 2 characters",
+  invalidName: "Only letters and spaces allowed",
+  invalidEmail: "Please enter a valid email address",
+  invalidPhone: "Invalid phone number for selected country",
+};
+
+export function initFormHandler(formSelector) {
+  let selector = formSelector || "[data-form]";
+
+  if (
+    typeof selector === "string" &&
+    !selector.startsWith("#") &&
+    !selector.startsWith(".") &&
+    !selector.startsWith("[")
+  ) {
+    if (document.getElementById(selector)) {
+      selector = `#${selector}`;
+    }
+  }
+
+  const forms = document.querySelectorAll(selector);
+
+  if (forms.length === 0) {
+    console.warn(
+      `[FormHandler Error]: Форма по селектору "${formSelector}" не найдена! Проверь ID в HTML и вызов в main.js.`,
+    );
+    return;
+  }
+
+  forms.forEach((form) => {
+    const inputs = form.querySelectorAll("input, textarea");
+
+    initPhoneMask(form);
+
+    inputs.forEach((input) => {
+      input.addEventListener("blur", () => validateField(input));
+
+      input.addEventListener("input", () => {
+        const parent = input.closest(".form__input-box");
+        if (
+          input.type === "hidden" ||
+          (parent && parent.classList.contains("_is-invalid"))
+        ) {
+          validateField(input);
+        }
+      });
+    });
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      let isFormValid = true;
+      inputs.forEach((input) => {
+        if (!validateField(input)) {
+          isFormValid = false;
+        }
+      });
+
+      if (isFormValid) {
+        handleFormSubmit(form);
+      } else {
+        const firstError = form.querySelector(
+          "._is-invalid input, ._is-invalid textarea",
+        );
+        if (firstError) firstError.focus();
+      }
+    });
+  });
+}
+
+function initPhoneMask(form) {
+  const phoneInput = form.querySelector('input[type="tel"]');
+  if (!phoneInput) return;
+
+  const defaultCountryKey = form.dataset.country?.toLowerCase();
+  const defaultCountry = phoneMasks[defaultCountryKey];
+
+  if (defaultCountry) {
+    phoneInput.placeholder = defaultCountry.mask;
+  }
+
+  phoneInput.addEventListener("focus", () => {
+    if (!phoneInput.value && defaultCountry) {
+      const countryCode = defaultCountry.mask.split(" ")[0];
+      phoneInput.value = countryCode + " ";
+    }
+  });
+
+  phoneInput.addEventListener("input", () => {
+    let cursorPosition = phoneInput.selectionStart;
+    const originalLength = phoneInput.value.length;
+
+    let digits = phoneInput.value.replace(/\D/g, "");
+    if (!digits) {
+      phoneInput.value = "";
+      return;
+    }
+
+    let matchedKey = null;
+
+    const sortedCountries = Object.keys(phoneMasks).sort((a, b) => {
+      return (
+        phoneMasks[b].mask.replace(/\D/g, "").length -
+        phoneMasks[a].mask.replace(/\D/g, "").length
+      );
+    });
+
+    for (const key of sortedCountries) {
+      const prefix = phoneMasks[key].mask.replace(/\D/g, "");
+      if (digits.startsWith(prefix)) {
+        matchedKey = key;
+        break;
+      }
+    }
+
+    if (!matchedKey && defaultCountryKey) {
+      matchedKey = defaultCountryKey;
+    }
+
+    if (!matchedKey) {
+      phoneInput.value = "+" + digits;
+      return;
+    }
+
+    const config = phoneMasks[matchedKey];
+    const mask = config.mask;
+
+    digits = digits.substring(0, config.digits);
+
+    let formatted = "";
+    let digitIndex = 0;
+
+    for (let i = 0; i < mask.length; i++) {
+      if (digitIndex >= digits.length) break;
+
+      if (mask[i] === "X") {
+        formatted += digits[digitIndex];
+        digitIndex++;
+      } else {
+        formatted += mask[i];
+        if (mask[i] === digits[digitIndex]) {
+          digitIndex++;
+        }
+      }
+    }
+
+    phoneInput.value = formatted;
+
+    const newLength = phoneInput.value.length;
+    cursorPosition = cursorPosition + (newLength - originalLength);
+    phoneInput.setSelectionRange(cursorPosition, cursorPosition);
+  });
+
+  phoneInput.addEventListener("blur", () => {
+    if (
+      defaultCountry &&
+      phoneInput.value.trim() === defaultCountry.mask.split(" ")[0]
+    ) {
+      phoneInput.value = "";
+    }
+  });
+}
+
+function validateField(input) {
+  const parent = input.closest(".form__input-box");
+  if (!parent) return true;
+
+  const errorSpan = parent.querySelector(".form__error");
+  const value = input.value.trim();
+  let isValid = true;
+  let message = "";
+
+  if (input.hasAttribute("required") && value === "") {
+    isValid = false;
+    message = errorMessages.empty;
+  } else if (input.name === "name" && value !== "") {
+    const nameRegex = /^[a-zA-Zа-яА-ЯёЁіІїЇєЄґҐ\s\-]+$/;
+    if (value.length < 2) {
+      isValid = false;
+      message = errorMessages.shortName;
+    } else if (!nameRegex.test(value)) {
+      isValid = false;
+      message = errorMessages.invalidName;
+    }
+  } else if (input.type === "email" && value !== "") {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(value)) {
+      isValid = false;
+      message = errorMessages.invalidEmail;
+    }
+  } else if (input.type === "tel" && value !== "") {
+    const digitsCount = value.replace(/\D/g, "").length;
+    let expectedDigits = 0;
+
+    for (const key in phoneMasks) {
+      const prefix = phoneMasks[key].mask.replace(/\D/g, "");
+      if (value.replace(/\D/g, "").startsWith(prefix)) {
+        expectedDigits = phoneMasks[key].digits;
+        break;
+      }
+    }
+
+    if (expectedDigits === 0 || digitsCount !== expectedDigits) {
+      isValid = false;
+      message = errorMessages.invalidPhone;
+    }
+  }
+
+  if (!isValid) {
+    if (errorSpan) errorSpan.textContent = message;
+    parent.classList.add("_is-invalid");
+    parent.classList.remove("_is-valid");
+  } else {
+    if (errorSpan) errorSpan.textContent = "";
+    parent.classList.remove("_is-invalid");
+    if (value !== "") {
+      parent.classList.add("_is-valid");
+    } else {
+      parent.classList.remove("_is-valid");
+    }
+  }
+
+  return isValid;
+}
+
+function handleFormSubmit(form) {
+  const formData = new FormData(form);
+  const formResults = Object.fromEntries(formData.entries());
+
+  form.reset();
+  form.querySelectorAll(".form__input-box").forEach((box) => {
+    box.classList.remove("_is-valid", "_is-invalid");
+  });
+
+  const modalId = form.getAttribute("data-modal-success");
+  const successModal = document.getElementById(modalId);
+
+  if (successModal) {
+    openModal(successModal);
+  }
+}

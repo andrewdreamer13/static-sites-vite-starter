@@ -23,6 +23,6 @@ export const initCookieBanner = () => {
     banner.classList.remove("cookie-banner--show");
   };
 
-  acceptBtn.addEventListener("click", () => handleChoice("accept"));
-  declineBtn.addEventListener("click", () => handleChoice("decline"));
+  acceptBtn.addEventListener("click", () => handleChoice("accepted"));
+  declineBtn.addEventListener("click", () => handleChoice("declined"));
 };

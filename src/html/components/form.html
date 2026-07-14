@@ -1,0 +1,118 @@
+<form
+  class="form {=$class}"
+  id="{=$id}"
+  action="#"
+  method="post"
+  novalidate
+  data-contry="ua"
+  data-modal-success="modal-success"
+>
+  <div class="form__input-box">
+    <label
+      class="form__label"
+      for="name"
+    >
+      Full name
+    </label>
+
+    <input
+      class="form__input"
+      id="name"
+      type="text"
+      name="name"
+      placeholder="Enter your name"
+      autocomplete="name"
+      required
+      aria-describedby="name-error"
+    />
+
+    <span
+      class="form__error"
+      id="name-error"
+    ></span>
+  </div>
+
+  <div class="form__input-box">
+    <label
+      class="form__label"
+      for="phone"
+    >
+      Phone
+    </label>
+
+    <input
+      class="form__input"
+      id="phone"
+      type="tel"
+      name="phone"
+      placeholder="Enter your phone"
+      autocomplete="tel"
+      required
+      aria-describedby="phone-error"
+    />
+
+    <span
+      class="form__error"
+      id="phone-error"
+    ></span>
+  </div>
+
+  <div class="form__input-box">
+    <label
+      class="form__label"
+      for="email"
+    >
+      Email
+    </label>
+
+    <input
+      class="form__input"
+      id="email"
+      type="email"
+      name="email"
+      placeholder="Enter your email"
+      autocomplete="email"
+      required
+      aria-describedby="email-error"
+    />
+
+    <span
+      class="form__error"
+      id="email-error"
+    ></span>
+  </div>
+
+  <load id="cities" name="cities" src="/src/html/components/custom-select.html" />
+  <load id="countries" name="countries" src="/src/html/components/custom-select.html" />
+
+  <div class="form__input-box">
+    <label
+      class="form__label"
+      for="message"
+    >
+      Message
+    </label>
+
+    <textarea
+      class="form__textarea"
+      id="message"
+      name="message"
+      rows="5"
+      placeholder="Write your message"
+      required
+      aria-describedby="message-error"
+    ></textarea>
+
+    <span
+      class="form__error"
+      id="message-error"
+    ></span>
+  </div>
+
+  <button
+    class="form__submit button"
+    type="submit"
+  >
+    Send message
+  </button>
+</form>
