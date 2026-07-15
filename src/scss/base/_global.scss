@@ -9,11 +9,11 @@
 }
 
 body {
-  background-color: var(--clr-bg);
-  color: var(--clr-text);
-  font-weight: t.$fw-reg;
-  font-size: t.$fs-base;
-  font-family: t.$font-main, t.$font-alt;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-weight: t.$fwReg;
+  font-size: t.$fsBase;
+  font-family: t.$fontMain, t.$fontAlt;
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
@@ -23,12 +23,11 @@ body {
   width: 250px;
   margin: 0 auto;
   padding: 10px;
-  border: 1px solid var(--clr-border);
-  background-color: var(--clr-surface);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
 }
 
 .btn-primary {
-  background-color: var(--clr-accent);
-  color: var(--clr-text);
+  background-color: var(--color-accent);
+  color: var(--color-text);
 }
-

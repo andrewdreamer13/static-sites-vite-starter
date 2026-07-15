@@ -1,60 +1,68 @@
 @use "sass:map";
 
-// 1. fonts
-$font-main: 'Ubuntu', sans-serif;
-$font-alt: 'Arial', sans-serif;
+// Typography
+$fontMain: 'Ubuntu', sans-serif;
+$fontAlt: 'Arial', sans-serif;
 
-$fw-light: 300;
-$fw-reg: 400;
-$fw-medium: 500;
-$fw-bold: 700;
+$fwLight:  300;
+$fwReg:    400;
+$fwMedium: 500;
+$fwBold:   700;
 
-$fs-base: 16px;
+$fsBase: 16px;
 
-// 2. grid and layers
-$space-xs: 4px;
-$space-sm: 8px;
-$space-md: 16px;
-$space-lg: 24px;
-$space-xl: 48px;
+// Spacing and Layout
+$spaceXs: 4px;
+$spaceSm: 8px;
+$spaceMd: 16px;
+$spaceLg: 24px;
+$spaceXl: 48px;
 
-$z-negative: -1;
-$z-base: 1;
-$z-header: 100;
+$zNegative: -1;
+$zBase:      1;
+$zHeader:  100;
 
-// 3. universal statuses
-$errorColor: #ff4d4d;
-$successColor: #2ecc71;
-$modalBg: #000000d1;
-$whiteColor: #fff;
-$textColor:#151515;
+// Absolute Colors
+$colorWhite: #ffffff;
+$colorBlack: #151515;
 
-// 4. themes
+// Light Theme Palette
+$colorLightBg:          #ffffff;
+$colorLightBgSecondary: #f4f4f4;
+$colorLightBorder:      #dddddd;
+$colorLightText:        #333333; 
+$colorLightTitle:       #1a1a1a; 
 
+// Dark Theme Palette
+$colorDarkBg:          #171919;
+$colorDarkBgSecondary: #252828;
+$colorDarkBorder:      #333333;
+$colorDarkText:        #cccccc; 
+$colorDarkTitle:       #ffffff; 
+
+// Brand Colors
+$colorAccent: #4af6cd;
+
+// System and Status Colors
+$colorError:    #ff4d4d;
+$colorSuccess:  #2ecc71;
+$colorModalBg:  #000000d1;
+
+// Theme Maps
 $light-theme: (
-  "bg": #ffffff,
-  "surface": #f4f4f4,
-  "text": #1a1a1a,
-  "text-muted": #666666,
-  "accent": #4af6cd,
-  "border": #dddddd
+  "bg":          $colorLightBg,
+  "bgSecondary": $colorLightBgSecondary,
+  "text":        $colorLightText,
+  "title":       $colorLightTitle, 
+  "accent":      $colorAccent,
+  "border":      $colorLightBorder
 );
 
 $dark-theme: (
-  "bg": #171919,
-  "surface": #252828,
-  "text": #ffffff,
-  "text-muted": #a0a0a0,
-  "accent": #4af6cd,
-  "border": #333333
+  "bg":          $colorDarkBg,
+  "bgSecondary": $colorDarkBgSecondary,
+  "text":        $colorDarkText,
+  "title":       $colorDarkTitle, 
+  "accent":      $colorAccent,
+  "border":      $colorDarkBorder
 );
-
-
-
-// Переменная,За что отвечает
-// --clr-bg,Главный фон страницы (body).
-// --clr-surface,"Фон вложенных элементов: карточки, модалки, плашки."
-// --clr-text,Основной текст (высокий контраст).
-// --clr-text-muted,"Второстепенный текст, подписи, плейсхолдеры (средний контраст)."
-// --clr-accent,"Главный акцентный цвет (кнопки, активные ссылки)."
-// --clr-border,"Цвет границ, разделителей, инпутов."

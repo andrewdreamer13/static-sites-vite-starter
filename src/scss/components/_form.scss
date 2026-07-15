@@ -17,7 +17,7 @@
     &._is-invalid {
       .form__error {
         visibility: visible;
-        color: t.$errorColor;
+        color: t.$colorError;
         opacity: 1;
       }
     }
@@ -25,7 +25,7 @@
     &._is-valid {
       .form__error {
         visibility: visible;
-        color: t.$successColor;
+        color: t.$colorSuccess;
         opacity: 1;
       }
     }
@@ -42,16 +42,16 @@
     border-radius: 15px;
      background: #666565;;
     box-shadow: 0 0 8px 0 rgba(66, 83, 69, 0.14);
-    color: t.$textColor;
+    color: var(--color-text);
     // text-transform: capitalize;
 
     &:focus-visible {
       outline: none;
-      box-shadow: 0 0 8px 0 t.$textColor;
+      box-shadow: 0 0 8px 0  var(--color-text);
     }
 
     &::placeholder {
-      color: t.$textColor;
+      color:  var(--color-text);
       font-size: 14px;
       opacity: 1;
     }
@@ -64,7 +64,7 @@
     top: 100%;
     left: 0;
     padding: 3px 20px;
-    color: t.$errorColor;
+    color: t.$colorError;
     font-size: 12px;
     opacity: 0;
     transition:
@@ -78,19 +78,19 @@
     height: 49px;
     padding: 10px 20px;
     border-radius: 15px;
-    background: t.$whiteColor;
+    background: t.$colorWhite;
     box-shadow: 0 0 8px 0 rgba(66, 83, 69, 0.14);
-    color: t.$textColor;
+   color: var(--color-text);
     text-transform: capitalize;
      resize: none;
 
     &:focus-visible {
       outline: none;
-      box-shadow: 0 0 8px 0 t.$textColor;
+      box-shadow: 0 0 8px 0 var(--color-text);
     }
 
     &::placeholder {
-      color: t.$textColor;
+     color: var(--color-text);
       font-size: 14px;
       opacity: 1;
     }

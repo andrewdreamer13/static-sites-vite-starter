@@ -97,7 +97,7 @@
 
 @mixin generate-theme($theme-map) {
   @each $key, $value in $theme-map {
-    --clr-#{$key}: #{$value};
+    --color-#{$key}: #{$value};
   }
 }
 
