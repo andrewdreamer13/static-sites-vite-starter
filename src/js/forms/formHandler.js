@@ -228,19 +228,59 @@ function validateField(input) {
   return isValid;
 }
 
-function handleFormSubmit(form) {
+async function handleFormSubmit(form) {
+  const submitBtn =
+    form.querySelector(".form__submit") ||
+    form.querySelector('button[type="submit"]');
+  const originalText = submitBtn ? submitBtn.textContent : "Send message";
+
+  
+  if (submitBtn) {
+    submitBtn.textContent = "Sending...";
+    submitBtn.disabled = true;
+  }
+
   const formData = new FormData(form);
-  const formResults = Object.fromEntries(formData.entries());
 
-  form.reset();
-  form.querySelectorAll(".form__input-box").forEach((box) => {
-    box.classList.remove("_is-valid", "_is-invalid");
-  });
+  try {
+    const response = await fetch(
+      form.action || "https://api.web3forms.com/submit",
+      {
+        method: "POST",
+        body: formData,
+      },
+    );
 
-  const modalId = form.getAttribute("data-modal-success");
-  const successModal = document.getElementById(modalId);
+    const data = await response.json();
 
-  if (successModal) {
-    openModal(successModal);
+    if (response.ok && data.success) {
+      
+      form.reset();
+      form.querySelectorAll(".form__input-box").forEach((box) => {
+        box.classList.remove("_is-valid", "_is-invalid");
+      });
+
+      
+      const modalId = form.getAttribute("data-modal-success");
+      const successModal = document.getElementById(modalId);
+
+      if (successModal) {
+        openModal(successModal);
+      } else {
+        alert("Success! Your message has been sent.");
+      }
+    } else {
+      alert("Error: " + (data.message || "Something went wrong"));
+    }
+  } catch (error) {
+    alert("Connection error. Please try again later.");
+    console.error("[FormHandler Fetch Error]:", error);
+  } finally {
+   
+    if (submitBtn) {
+      submitBtn.textContent = originalText;
+      submitBtn.disabled = false;
+    }
   }
 }
+

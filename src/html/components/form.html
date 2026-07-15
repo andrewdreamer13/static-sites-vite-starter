@@ -1,12 +1,15 @@
 <form
   class="form {=$class}"
   id="{=$id}"
-  action="#"
-  method="post"
+  action="https://api.web3forms.com/submit"
+  method="POST"
   novalidate
   data-contry="ua"
   data-modal-success="modal-success"
 >
+  <input type="hidden" name="access_key" value="0d0b7a66-56f9-4ab4-a8f9-a92b96d45986">
+  <input type="checkbox" name="botcheck" hidden>
+
   <div class="form__input-box">
     <label
       class="form__label"
