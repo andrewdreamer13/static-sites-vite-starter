@@ -1,4 +1,3 @@
-
 import sharp from "sharp";
 import fs from "fs";
 import path from "path";
@@ -16,57 +15,79 @@ const paths = {
   },
 };
 
-// Creating folders
 const ensureDir = (dir) => {
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 };
 
-// Cleaning folders before build
+const smartCleanImgDir = (sourceFiles) => {
+  if (!fs.existsSync(paths.img.out)) return;
 
-const cleanOutputDirs = () => {
-  [paths.img.out, paths.fonts.out].forEach((dir) => {
-    if (fs.existsSync(dir)) {
-      const files = fs.readdirSync(dir);
-      for (const file of files) {
-        if (file !== ".gitkeep") {
-          const fullPath = path.join(dir, file);
-          // Удаляем и файлы, и подпапки (кроме .gitkeep и raw)
-          fs.rmSync(fullPath, { recursive: true, force: true });
-        }
-      }
+  const sourceNames = new Set(sourceFiles.map((fp) => path.parse(fp).name));
+  const outputFiles = fs.readdirSync(paths.img.out);
+
+  outputFiles.forEach((file) => {
+    if (file === ".gitkeep") return;
+
+    const outputName = path.parse(file).name;
+
+    if (!sourceNames.has(outputName)) {
+      fs.unlinkSync(path.join(paths.img.out, file));
+      console.log(`🗑️ Deleted obsolete image: ${file}`);
     }
-    ensureDir(dir);
   });
-  console.log("🧹 Output folders cleaned (.gitkeep preserved)");
 };
 
-// 1. Image conversion
+const cleanFontsDir = () => {
+  if (fs.existsSync(paths.fonts.out)) {
+    const files = fs.readdirSync(paths.fonts.out);
+    for (const file of files) {
+      if (file !== ".gitkeep") {
+        fs.rmSync(path.join(paths.fonts.out, file), {
+          recursive: true,
+          force: true,
+        });
+      }
+    }
+  }
+  ensureDir(paths.fonts.out);
+};
 
 async function convertImages() {
   ensureDir(paths.img.out);
-
   const files = globSync(paths.img.in);
 
   if (files.length === 0) {
-    console.log("⚠️No images found on the path:", paths.img.in);
+    console.log("⚠️ No images found on the path:", paths.img.in);
     return;
   }
 
-  for (const filePath of files) {
-    const fileName = path.parse(filePath).name;
+  smartCleanImgDir(files);
 
-    await sharp(filePath)
-      .webp({ quality: 80 })
-      .toFile(path.join(paths.img.out, `${fileName}.webp`));
+  await Promise.all(
+    files.map(async (filePath) => {
+      const fileName = path.parse(filePath).name;
+      const destPath = path.join(paths.img.out, `${fileName}.webp`);
 
-    console.log(`✅ Image: ${path.basename(filePath)} -> webp`);
-  }
+      if (fs.existsSync(destPath)) {
+        const sourceStat = fs.statSync(filePath);
+        const destStat = fs.statSync(destPath);
+
+        if (sourceStat.mtime <= destStat.mtime) {
+          return;
+        }
+      }
+
+      await sharp(filePath).webp({ quality: 80 }).toFile(destPath);
+
+      console.log(
+        `✅ Image converted/updated: ${path.basename(filePath)} -> webp`,
+      );
+    }),
+  );
 }
 
-// 2. Font conversion
-
 function convertFonts() {
-  ensureDir(paths.fonts.out);
+  cleanFontsDir();
   const files = globSync(paths.fonts.in);
 
   if (files.length === 0) {
@@ -94,15 +115,11 @@ function convertFonts() {
   });
 }
 
-// Running the entire process
 (async () => {
   try {
-    // First, we clean out the old
-    cleanOutputDirs();
-
-    // Then we generate a new one
     await convertImages();
     convertFonts();
+    console.log("🚀 Prebuild processing completed successfully!");
   } catch (err) {
     console.error("❌ Error during preparation:", err);
   }
