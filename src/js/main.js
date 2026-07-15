@@ -25,6 +25,8 @@ import { initTabs } from "./components/tabs.js";
 import { initCookieBanner } from "./components/cookieBanner.js";
 import { initCustomSelect } from "./components/customSelect.js";
 import { initFormHandler } from "./forms/formHandler.js";
+import { initResizableSwiper } from "./services/matchMediaSlider.js";
+
 
 document.addEventListener("DOMContentLoaded", () => {
   console.log("The project works");
@@ -42,6 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initCustomSelect("#cities", optionsData.cities);
   initCustomSelect("#countries", optionsData.countries);
   initFormHandler("#form1");
+  initResizableSwiper();
   // initUpButton(".footer__up-button");
 
 
