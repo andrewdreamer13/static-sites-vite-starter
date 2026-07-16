@@ -7,6 +7,7 @@ import zipPack from "vite-plugin-zip-pack";
 import injectHTML from "vite-plugin-html-inject";
 import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
 import { ViteMinifyPlugin } from "vite-plugin-minify";
+import Sitemap from "vite-plugin-sitemap";
 
 const rootFolder = path.basename(path.resolve());
 const isGH =
@@ -17,7 +18,11 @@ export default defineConfig({
 
   plugins: [
     injectHTML(),
-
+    Sitemap({
+      hostname: "https://your-client-domain.com",
+     // dynamicRoutes: ["/about", "/contacts", "/services"],
+      readable: true,
+    }),
     viteImagemin({
       gifsicle: { optimizationLevel: 7, interlaced: false },
       optipng: { optimizationLevel: 7 },
@@ -102,4 +107,3 @@ export default defineConfig({
     },
   },
 });
-

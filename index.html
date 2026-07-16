@@ -1,38 +1,14 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0"
-    />
-    <meta
-      name="description"
-      content=""
-    />
-    <meta
-      name="keywords"
-      content=""
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="/favicon.png"
-    />
-    <title>static-sites-vite-starter</title>
-    <script>
-      (function () {
-        const savedTheme = localStorage.getItem("theme");
-        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-          .matches
-          ? "dark"
-          : "light";
-        const theme = savedTheme || systemTheme;
-        document.documentElement.setAttribute("data-theme", theme);
-      })();
-    </script>
-  </head>
+  <load
+    src="/src/html/components/head.html"
+    title="[Page Title: 60-70 characters max. Brand name + primary keyword]"
+    description="[Page Description: 150-160 characters max. Engaging snippet for Google search results]"
+    keywords="[Comma-separated keywords. E.g.: hvac design, ventilation installation, custom kitchen]"
+    site-url="https://[your-client-domain.com]/"
+    og-image="img/og-preview.jpg"
+    theme-color="[HEX color code for mobile browsers address bar. E.g.: #0f172a]"
+  />
   <body>
     <!-- the way to use vite-plugin-html-inject -->
     <load src="/src/html/layout/header.html" />
@@ -97,8 +73,6 @@
       data-svg-id="vent"
     ></div>
 
-   
-
     <!-- html code for lazySvgLoader with fetch -->
 
     <div
@@ -108,7 +82,6 @@
       data-svg-src="/src/html/inline-icons/vent.html"
     ></div>
 
-   
     <script
       type="module"
       src="/src/js/main.js"
