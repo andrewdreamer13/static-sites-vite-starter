@@ -8,7 +8,7 @@
     "dev": "node prebuild.js && vite",
     "build": "node prebuild.js && vite build",
     "preview": "vite preview",
-    "predeploy": "npm run build",
+    "predeploy": "node prebuild.js && vite build --mode github",
     "deploy": "gh-pages -d dist"
   },
   "devDependencies": {
