@@ -26,7 +26,7 @@ import { initCookieBanner } from "./components/cookieBanner.js";
 import { initCustomSelect } from "./components/customSelect.js";
 import { initFormHandler } from "./forms/formHandler.js";
 import { initResizableSwiper } from "./services/matchMediaSlider.js";
-import {initMaps} from "./services/lazyMapLoader.js";
+import {initMaps} from "./services/lazyGoogleMapLoader.js";
 
 
 document.addEventListener("DOMContentLoaded", () => {
