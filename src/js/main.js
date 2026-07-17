@@ -26,6 +26,7 @@ import { initCookieBanner } from "./components/cookieBanner.js";
 import { initCustomSelect } from "./components/customSelect.js";
 import { initFormHandler } from "./forms/formHandler.js";
 import { initResizableSwiper } from "./services/matchMediaSlider.js";
+import {initMaps} from "./services/lazyMapLoader.js";
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -45,6 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initCustomSelect("#countries", optionsData.countries);
   initFormHandler("#form1");
   initResizableSwiper();
+  initMaps();
   // initUpButton(".footer__up-button");
 
 
