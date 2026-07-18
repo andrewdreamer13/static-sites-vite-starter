@@ -4,7 +4,7 @@ export const initCustomMap = (container) => {
   const { mapLat, mapLng, mapId } = container.dataset;
 
   // Твой публичный токен Mapbox
-  mapboxgl.accessToken = "";
+  mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN;
 
   const map = new mapboxgl.Map({
     container: container,
