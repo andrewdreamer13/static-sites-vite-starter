@@ -22,7 +22,9 @@ export const initCustomMap = (container) => {
     }),
   );
 
-  new mapboxgl.Marker()
+  new mapboxgl.Marker({
+    color: "#d0b049",
+  })
     .setLngLat([parseFloat(mapLng), parseFloat(mapLat)])
     .addTo(map);
 

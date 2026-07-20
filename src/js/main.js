@@ -27,7 +27,7 @@ import { initCustomSelect } from "./components/customSelect.js";
 import { initFormHandler } from "./forms/formHandler.js";
 import { initResizableSwiper } from "./services/matchMediaSlider.js";
 import {initMaps} from "./services/lazyMapLoader.js";
-
+import { initVideoLoader } from "./services/lazyVideoLoader.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   console.log("The project works");
@@ -47,6 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initFormHandler("#form1");
   initResizableSwiper();
   initMaps();
+  initVideoLoader();
   // initUpButton(".footer__up-button");
 
 
