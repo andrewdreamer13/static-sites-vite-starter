@@ -1,3 +1,13 @@
+
+<!--
+  Main entry HTML template for the homepage, assembling modular layout partials via Vite HTML inject and establishing data-attribute containers for lazy-loaded media.
+
+  1. `<load>` components - Injects modular HTML partials including head metadata, headers, footers, page sections, interactive UI elements, and modal dialogs.
+  2. `data-svg-receiver` containers - Serves as placeholders for lazy-loading inline SVG graphics via template clones or external fetches.
+  3. `data-map-receiver` containers - Defines mount points for deferred loading of iframe Google Maps or custom interactive maps.
+  4. `data-video-receiver` containers - Sets up deferred loading targets for local WebM videos or embedded YouTube players.
+-->
+
 <!doctype html>
 <html lang="en">
   <load
@@ -16,20 +26,14 @@
 
     <main>
       <!-- ways to the images -->
-      <picture>
-        <source
-          srcset="/src/assets/img/webp/beach.webp"
-          type="image/webp"
-        />
-        <img
-          class="image"
-          src="/src/assets/img/raw/beach.jpg"
-          alt="beach"
-          loading="lazy"
-          width="550"
-          height="385"
-        />
-      </picture>
+      <img
+        class="image"
+        src="src/assets/img/webp/beach.webp"
+        alt="beach"
+        loading="lazy"
+        width="550"
+        height="385"
+      />
 
       <load src="/src/html/components/accordion.html" />
       <load src="/src/html/components/main-slider.html" />
@@ -84,7 +88,7 @@
 
     <!-- html code for lazyMapLoader -->
 
-    <!-- Стандартный iframe -->
+    <!-- Standart iframe -->
     <div
       class="map-receiver"
       data-map-receiver
@@ -92,7 +96,7 @@
       data-map-src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d164163.50631451618!2d36.3018588!3d49.9915823!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sua!4v1784274912178!5m2!1sen!2sua"
     ></div>
 
-    <!-- Кастомная карта (через API)  -->
+    <!-- Custom map  -->
     <div
       class="map-receiver"
       data-map-receiver
@@ -102,13 +106,13 @@
       data-map-lng="-0.1278"
     ></div>
 
-     <!-- local video -->
+    <!-- local video -->
     <div
       class="video-wrapper"
       data-video-receiver
       data-video-type="local"
-      data-video-src="/assets/video/test.mp4"
-      data-video-poster="src/assets/img/webp/poster.webp"
+      data-video-src="/assets/video/test-video.webm"
+      data-video-poster="/assets/img/poster.webp"
     ></div>
 
     <!-- youtube video -->
@@ -117,7 +121,7 @@
       data-video-receiver
       data-video-type="youtube"
       data-video-src="dQw4w9WgXcQ"
-      data-video-poster="src/assets/img/webp/poster.webp"
+      data-video-poster="/assets/img/poster.webp"
     ></div>
 
     <script
@@ -126,19 +130,3 @@
     ></script>
   </body>
 </html>
-
-<!-- <div 
-  class="video-wrapper" 
-  data-video-receiver 
-  data-video-type="local" 
-  data-video-src="/assets/video/promo.mp4" 
-  data-video-poster="src/assets/img/webp/poster.webp"
-></div>
-
-<div 
-  class="video-wrapper" 
-  data-video-receiver 
-  data-video-type="youtube" 
-  data-video-src="dQw4w9WgXcQ"
-  data-video-poster="src/assets/img/webp/poster2.webp"
-></div> -->

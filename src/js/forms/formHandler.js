@@ -1,3 +1,13 @@
+
+/**
+ * Handles form initialization, dynamic multi-country phone input masking, real-time input validation, and asynchronous form submission.
+ * 
+ * 1. `initFormHandler` - Attaches validation, phone mask formatting, and submit event handlers to target form elements.
+ * 2. `initPhoneMask` - Applies automatic phone masking and country code formatting to telephone inputs based on user input and country patterns.
+ * 3. `validateField` - Performs validation on required fields, names, email addresses, and phone numbers, updating error UI states accordingly.
+ * 4. `handleFormSubmit` - Asynchronously sends form data via Fetch API, toggles UI loading states, resets fields upon success, and triggers a confirmation modal.
+ */
+
 import { phoneMasks } from "../data/phoneMasks.js";
 import { openModal } from "../components/modalManager.js";
 

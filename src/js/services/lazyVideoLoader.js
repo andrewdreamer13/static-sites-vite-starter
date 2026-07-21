@@ -1,3 +1,11 @@
+
+/**
+ * Lazy-loads video placeholders when they enter the viewport and initializes an interactive video player upon user click.
+ * 
+ * 1. `initVideoLoader` - Observes designated video containers using IntersectionObserver and triggers poster setup when near the viewport.
+ * 2. `setupContainer` - Injects a poster image and play button into the container, attaching a one-time click listener to mount the interactive video player.
+ */
+
 import { initCustomPlayer } from "./customVideoPlayer.js"; 
 
 export const initVideoLoader = () => {

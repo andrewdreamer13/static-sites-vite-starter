@@ -1,3 +1,10 @@
+
+/**
+ * Stores predefined options data for custom select components, including city names and key-value country lists.
+ * 
+ * 1. `optionsData` - Object containing static data sets (cities and countries) used to populate custom select dropdowns.
+ */
+
 export const optionsData = {
   cities: ["London", "Paris", "New-York", "Tokio", "Berlin", "Madryd"],
   countries: [

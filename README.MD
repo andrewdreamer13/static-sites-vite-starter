@@ -1,105 +1,255 @@
+
 # Static Sites Vite Starter 🚀
 
-A professional, modular starter kit for building high-performance static websites. This boilerplate is designed to automate routine tasks, optimize assets, and keep your project architecture clean.
+> A professional, modular starter kit for building high-performance static websites with Vite, automated asset optimization, reusable UI modules, and a scalable project architecture.
 
-## ✨ Key Features
+---
 
-- **Modular HTML**: Organize your code using HTML partials for a component-based workflow.
-- **Modern CSS**: Pre-configured **SCSS** structure with a clean reset system and variable-driven design.
-- **Smart Asset Pipeline**:
-  - **Images**: Automated conversion of `jpg/png` to **WebP** via Sharp.
-  - **Fonts**: Automated conversion of `ttf` to **Woff2** (or direct copying of existing woff2).
-  - **Recursive Search**: Handles nested folders within your source directories.
-- **Icon Management**: Dual-system for icons — **SVG Sprites** for efficiency and a dedicated folder for **Inline SVG**.
-- **Performance First**: Optimized for speed and high Lighthouse scores right out of the box.
-- **Clean Git History**: Pre-configured `.gitignore` and `.gitkeep` files to maintain project structure without bloat.
+# ✨ Features
 
+- ⚡ **Vite 7+** with fast HMR and optimized production builds.
+- 🧩 **Component-based HTML** using `vite-plugin-html-inject`.
+- 🎨 **Modern SCSS architecture** with PostCSS and Autoprefixer.
+- 🖼 **Automatic image optimization**
+  - Converts `.jpg` and `.png` to **WebP**
+  - Preserves original files
+- 🔤 **Automatic font conversion**
+  - Converts `.ttf` to `.woff2`
+  - Supports nested folders
+- 🎯 **SVG Sprite generation**
+- 📦 **Lazy Inline SVG system**
+- 🌙 **FOUC-free dark/light theme switcher**
+- ♿ Accessibility helpers
+  - Focus trapping
+  - Body scroll locking
+  - Keyboard navigation
+  - ARIA support
+- 🚀 One-command GitHub Pages deployment.
 
-🛠 Pre-configured Modules
-The starter comes with several pre-built JavaScript modules to speed up development:
+---
 
-1. Lazy SVG Loader
-Path: src/js/modules/lazySvgLoader.js
+# 🛠 Included Modules
 
-An efficient engine for inlining SVG icons without polluting the HTML source or duplicating IDs.
+### Lazy SVG Loader
 
-Library File: src/html/inline-icons/inline-icons-templates.html (contains all SVG <template> blocks).
+Loads inline SVGs from HTML templates without duplicating markup.
 
-Usage: Add data-svg-receiver and data-svg-id="template-id" to any element.
+**Usage**
 
-2. Advanced Burger Menu
-Path: src/js/main.js (initBurger)
+```html
+<div
+  data-svg-receiver
+  data-svg-id="icon-phone">
+</div>
+```
 
-A robust, accessible navigation logic for mobile devices.
+---
 
-Features: Body scroll locking, ESC key support, and backdrop interaction.
+### Burger Menu
 
-Styles: Fully responsive implementation in src/scss/components/_burger.scss.
+Accessible mobile navigation with:
 
-3. Reusable Modal System
-A flexible, trigger-based system for handling popups and overlays.
+- body scroll locking
+- focus trap
+- Escape closing
+- backdrop closing
 
-Logic: Supports multiple modal windows with unique content templates.
+---
 
-Accessibility: Focus trapping and backdrop interactions are handled out of the box.
+### Modal
 
-4. Theme Management System
-A lightweight, persistent theme switcher (Dark/Light mode).
+Reusable modal system featuring:
 
-Persistence: Saves preference to localStorage.
+- data attribute triggers
+- focus management
+- Escape support
+- backdrop click closing
 
-System Sync: Automatically respects the user's OS color scheme.
+---
 
-Implementation: Toggles a global .dark-theme class on the <html> element.
+### Custom Select
 
-## 📁 Project Structure
+Accessible dropdown component supporting:
 
-To use the automated asset pipeline, follow this folder structure:
+- keyboard navigation
+- single-open mode
+- dynamic options
 
-- `src/assets/img/raw/` — Put your source images here (supports subfolders). They will be converted to `src/assets/img/webp/`.
-- `src/assets/fonts/raw/` — Put your `.ttf` or `.woff2` fonts here. They will be processed into `src/assets/fonts/woff2/`.
-- `src/assets/icons/` — SVG files placed here are automatically combined into an **SVG Sprite**.
-- `src/html/inline-icons/` — Place SVGs here if you intend to inject them directly into your HTML code.
-- `src/html/inline-icons/inline-icons-templates.html` — file with SVG templates. Injected into index.html with <load>
+---
 
-## 📁 SCSS Structure
+### Tabs
 
-- **tools/** — Variables, mixins, and functions (no rendered CSS).
-- **base/** — Reset, typography, and global element styles.
-- **components/** — Reusable UI elements (buttons, burger, logo).
-- **layouts/** — Page shell (header, footer, container).
-- **sections/** — Page-specific content blocks (hero, services).
+Accessible tabs with automatic ARIA attributes.
 
-## 🛠 Installation & Usage
+---
 
-1.  **Clone the repository:**
+### Sliders
 
-    ```bash
-    git clone https://github.com/andrewdreamer13/static-sites-vite-starter.git
-    ```
+Ready-to-use Swiper integration.
 
-2.  **Reset Git History** (for a new project):
+---
 
-    ```bash
-    rm -rf .git
-    git init
-    ```
+### Maps
 
-3.  **Install dependencies:**
+Supports:
 
-    ```bash
-    npm install
-    ```
+- Mapbox GL JS
+- iframe-based maps
 
-4.  **Configure `package.json`**: Update the `"name"` field with your project title.
+---
 
-5.  **Start Development Server**:
-    ```bash
-    npm run dev
-    ```
-    _This command runs the asset helper and starts the Vite dev server._
+### Preloader
 
-## 📦 Production Commands
+Automatically hides after page load.
 
-- `npm run build` — Cleans output folders, processes all assets, and bundles the project into the `dist` folder with high-level compression.
-- `npm run preview` — Locally previews the production build.
+---
+
+### Scroll To Top Button
+
+Smooth scrolling back to the top.
+
+---
+
+### Theme Switcher
+
+Supports:
+
+- system theme
+- localStorage persistence
+- zero flash on load
+
+---
+
+# 📦 Tech Stack
+
+## Core
+
+- Vite
+- JavaScript (ES Modules)
+- Sass (SCSS)
+- PostCSS
+- Autoprefixer
+
+## Libraries
+
+- GSAP
+- Swiper
+- Mapbox GL JS
+- Plyr
+
+---
+
+# 📁 Project Structure
+
+```text
+.
+├── prebuild.js
+├── vite.config.js
+├── package.json
+└── src
+    ├── assets
+    │   ├── fonts
+    │   │   ├── raw
+    │   │   └── woff2
+    │   ├── img
+    │   │   ├── raw
+    │   │   └── webp
+    │   └── icons
+    ├── html
+    │   ├── partials
+    │   └── inline-icons
+    ├── js
+    │   ├── app.js
+    │   ├── modules
+    │   └── services
+    └── scss
+        ├── tools
+        ├── base
+        ├── components
+        ├── layouts
+        └── sections
+```
+
+---
+
+# 🎨 SCSS Structure
+
+| Folder | Purpose |
+|---------|---------|
+| `tools/` | Variables, mixins and functions |
+| `base/` | Reset, typography, root variables |
+| `components/` | Reusable UI components |
+| `layouts/` | Header, footer and layout styles |
+| `sections/` | Page-specific blocks |
+
+---
+
+# 🚀 Installation
+
+Clone the repository.
+
+```bash
+git clone https://github.com/andrewdreamer13/static-sites-vite-starter.git
+cd static-sites-vite-starter
+```
+
+(Optional) Start with a clean Git history.
+
+```bash
+rm -rf .git
+git init
+```
+
+Install dependencies.
+
+```bash
+npm install
+```
+
+Update the project name inside **package.json**.
+
+---
+
+# 💻 Development
+
+Start the development server.
+
+```bash
+npm run dev
+```
+
+Build for production.
+
+```bash
+npm run build
+```
+
+Preview the production build.
+
+```bash
+npm run preview
+```
+
+Deploy to GitHub Pages.
+
+```bash
+npm run deploy
+```
+
+---
+
+# ⚙️ npm Scripts
+
+| Command | Description |
+|----------|-------------|
+| `npm run dev` | Runs prebuild tasks and starts Vite |
+| `npm run build` | Creates a production build |
+| `npm run preview` | Serves the production build locally |
+| `npm run predeploy` | Builds the project for GitHub Pages |
+| `npm run deploy` | Deploys `dist/` to GitHub Pages |
+
+---
+
+# 📄 License
+
+Feel free to use this starter for personal and commercial projects.

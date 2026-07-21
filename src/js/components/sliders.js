@@ -1,3 +1,11 @@
+
+/**
+ * Initializes Swiper slider instances with bundled CSS styles and custom control configurations (pagination, navigation buttons, and scrollbars).
+ * 
+ * 1. `initSliders` - Serves as the entry point wrapper to trigger slider setup routines across the application.
+ * 2. `initMainSlider` - Instantiates a centered, looping Swiper carousel for `.main-slider` containers with interactive navigation, pagination, and scrollbar controls.
+ */
+
 import Swiper from "swiper/bundle";
 import "swiper/css/bundle";
 

@@ -1,3 +1,10 @@
+
+/**
+ * Initializes an interactive Mapbox GL JS map instance using target container dataset attributes, custom styling, navigation controls, and a location marker.
+ * 
+ * 1. `initCustomMap` - Configures Mapbox access using Vite environment variables, instantiates the map with custom styles and controls at target coordinates, attaches a pin marker, and updates the loaded state.
+ */
+
 import mapboxgl from "mapbox-gl";
  
 export const initCustomMap = (container) => {

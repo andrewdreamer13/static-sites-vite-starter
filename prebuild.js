@@ -1,3 +1,14 @@
+
+/**
+ * Automates prebuild asset processing by converting raw images into optimized WebP format and converting TTF fonts to WOFF2.
+ * 
+ * 1. `ensureDir` - Recursively creates a target directory if it does not already exist.
+ * 2. `smartCleanImgDir` - Removes generated WebP files from the output directory if their corresponding raw source files no longer exist.
+ * 3. `cleanFontsDir` - Clears the target font folder before conversion while preserving the `.gitkeep` file.
+ * 4. `convertImages` - Scans raw image assets, cleans obsolete files, and converts new or updated images to WebP format using modification timestamps.
+ * 5. `convertFonts` - Scans raw font assets, converts TTF files to WOFF2 format, and copies pre-existing WOFF2 files directly to the output folder.
+ */
+
 import sharp from "sharp";
 import fs from "fs";
 import path from "path";

@@ -1,3 +1,14 @@
+
+/**
+ * Manages focus trapping and accessibility within specific UI scopes (such as modals or sidebars), restricting Tab navigation cycles and restoring focus on close.
+ * 
+ * 1. `getFocusableElements` - Queries and returns all visible, interactive focusable elements within a target container.
+ * 2. `handleTabKey` - Traps Tab and Shift+Tab keyboard navigation within the boundaries of the currently active scope.
+ * 3. `initFocusManager` - Attaches the global keydown listener to initiate focus trap handling across the application.
+ * 4. `openScope` - Saves the previously active element, activates a new focus scope, and sets focus to its first focusable element.
+ * 5. `closeScope` - Deactivates the active focus scope and restores keyboard focus to the previously saved element.
+ */
+
 let activeScope = null;
 let lastFocusedElement = null;
 

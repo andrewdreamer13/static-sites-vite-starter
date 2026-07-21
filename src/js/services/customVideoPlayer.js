@@ -1,3 +1,10 @@
+
+/**
+ * Dynamically mounts and initializes a Plyr video player instance for local video files or YouTube embeds.
+ * 
+ * 1. `initCustomPlayer` - Creates the appropriate video DOM node or YouTube embed container based on the provided media type and attaches a new Plyr player instance.
+ */
+
 import Plyr from "plyr";
 
 export const initCustomPlayer = (container, { type, src }) => {

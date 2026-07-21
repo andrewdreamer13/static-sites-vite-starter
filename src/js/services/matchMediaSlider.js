@@ -1,3 +1,11 @@
+
+/**
+ * Conditionally initializes and destroys Swiper instances based on CSS media query breakpoints.
+ * 
+ * 1. `createResizableSwiper` - Listens to a media query and manages the lifecycle (initialization and destruction) of a Swiper instance as screen sizes change.
+ * 2. `initResizableSwiper` - Configures and triggers responsive Swiper sliders for specific target elements across defined breakpoints.
+ */
+
 import Swiper from "swiper/bundle";
 
 const createResizableSwiper = (breakpointString,selector,settings,callback) => {
