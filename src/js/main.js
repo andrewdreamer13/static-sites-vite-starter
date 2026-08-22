@@ -37,6 +37,7 @@ import { initResizableSwiper } from "./services/matchMediaSlider.js";
 import {initMaps} from "./services/lazyMapLoader.js";
 import { initVideoLoader } from "./services/lazyVideoLoader.js";
 import { splitTextIntoSpans } from "./services/splitText.js";
+import { initDatePicker } from "./components/dataPicker.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   console.log("The project works");
@@ -56,6 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initResizableSwiper();
   initMaps();
   initVideoLoader();
+  initDatePicker();
    splitTextIntoSpans(".title");
   // initUpButton(".footer__up-button");
 

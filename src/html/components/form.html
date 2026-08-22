@@ -88,6 +88,34 @@
   <load id="cities" name="cities" src="/src/html/components/custom-select.html" />
   <load id="countries" name="countries" src="/src/html/components/custom-select.html" />
 
+   <div class="form__input-box">
+    <label
+      class="form__label"
+      for="appointment-date"
+    >
+      Appointment Date
+    </label>
+
+    <input
+      class="form__input"
+      id="appointment-date"
+      type="text"
+      name="appointmentDate"
+      placeholder="08/20/2026 7:30 PM"
+      required
+      aria-describedby="date-error"
+    />
+    <svg class="form__date-icon">
+      <use href="#icons-calendar"></use>
+    </svg>
+
+    <span
+      class="form__error"
+      id="date-error"
+    ></span>
+  </div>
+
+
   <div class="form__input-box">
     <label
       class="form__label"
