@@ -36,9 +36,8 @@ const setupContainer = (container) => {
 
   container.addEventListener(
     "click",
-    () => {
-      
-      initCustomPlayer(container, { type: videoType, src: videoSrc });
+    async () => {
+      await initCustomPlayer(container, { type: videoType, src: videoSrc });
       container.classList.add("_is-active");
     },
     { once: true },

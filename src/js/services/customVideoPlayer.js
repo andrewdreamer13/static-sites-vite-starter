@@ -5,9 +5,12 @@
  * 1. `initCustomPlayer` - Creates the appropriate video DOM node or YouTube embed container based on the provided media type and attaches a new Plyr player instance.
  */
 
-import Plyr from "plyr";
+//import Plyr from "plyr";
 
-export const initCustomPlayer = (container, { type, src }) => {
+export const initCustomPlayer = async (container, { type, src }) => {
+  const plyrModule = await import("plyr");
+  const Plyr = plyrModule.default || plyrModule;
+
   let mediaElement;
 
   if (type === "youtube") {

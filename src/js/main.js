@@ -38,6 +38,9 @@ import {initMaps} from "./services/lazyMapLoader.js";
 import { initVideoLoader } from "./services/lazyVideoLoader.js";
 import { splitTextIntoSpans } from "./services/splitText.js";
 import { initDatePicker } from "./components/dataPicker.js";
+import { initCurrentYear } from "./helpers/currentYear.js";
+import { initSyncDataAttrWithText } from "./helpers/syncDataAttrWithText.js";
+import { initLongTextWatcher } from "./helpers/longTextWatcher.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   console.log("The project works");
@@ -59,6 +62,9 @@ document.addEventListener("DOMContentLoaded", () => {
   initVideoLoader();
   initDatePicker();
    splitTextIntoSpans(".title");
+    initSyncDataAttrWithText(".footer__author", "text");
+    initLongTextWatcher(".main-title__word");
+     initCurrentYear();
   // initUpButton(".footer__up-button");
 
 

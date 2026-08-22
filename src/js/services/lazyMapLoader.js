@@ -13,7 +13,7 @@ export const initMaps = () => {
 
   const observer = new IntersectionObserver(
     (entries, observer) => {
-      entries.forEach((entry) => {
+      entries.forEach(async (entry) => {
         if (entry.isIntersecting) {
           const container = entry.target;
           const type = container.dataset.mapType;
@@ -21,7 +21,7 @@ export const initMaps = () => {
           if (type === "iframe") {
             initIframeMap(container);
           } else if (type === "custom") {
-            initCustomMap(container);
+            await initCustomMap(container);
           }
 
           observer.unobserve(container);
