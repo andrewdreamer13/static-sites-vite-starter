@@ -1,11 +1,10 @@
-
 /**
  * Configures Vite build tool, including base paths, HTML injection, sitemap generation, image/SVG optimization, PostCSS processing, minification, and asset bundling.
- * 
+ *
  * 1. `defineConfig` - Returns the main Vite configuration dynamically based on the build mode (standard relative path or GitHub Pages subpath).
  * 2. `assetFileNames` - Categorizes and routes compiled build assets (images, fonts, CSS) into organized subdirectories with hashed filenames.
  */
-
+// starter
 import { defineConfig } from "vite";
 import path from "path";
 import viteImagemin from "vite-plugin-imagemin";
@@ -20,11 +19,9 @@ import Sitemap from "vite-plugin-sitemap";
 const rootFolder = path.basename(path.resolve());
 
 export default defineConfig(({ mode }) => {
-  
   const isGH = mode === "github";
 
   return {
-    
     base: isGH ? `/${rootFolder}/` : "./",
 
     plugins: [
@@ -103,6 +100,13 @@ export default defineConfig(({ mode }) => {
           404: path.resolve(__dirname, "404.html"),
         },
         output: {
+          sanitizeFileName(name) {
+            const match = /^[a-z0-9]/i.exec(name);
+            if (!match) {
+              return name.replace(/^[^a-z0-9]+/, "");
+            }
+            return name;
+          },
           assetFileNames: (assetInfo) => {
             let extType = assetInfo.name.split(".").at(-1);
 
@@ -123,4 +127,3 @@ export default defineConfig(({ mode }) => {
     },
   };
 });
-
