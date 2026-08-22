@@ -10,21 +10,21 @@
     position: relative;
     width: 100%;
     padding: 15px 50px 15px 20px;
-
-    color: #fff;
     background-color: #959393;
-
-    font-family: sans-serif;
+    color: #fff;
     font-size: 17px;
+    font-family: sans-serif;
     letter-spacing: 1px;
     text-align: left;
     text-transform: uppercase;
-
     cursor: pointer;
-
     transition:
-      background-color .3s,
-      color .3s;
+      background-color 0.3s,
+      color 0.3s;
+
+    &.is-selected {
+      color: t.$colorBlack;
+    }
 
     &::after {
       position: absolute;
@@ -36,14 +36,14 @@
 
       transform: translateY(-50%);
       transform-origin: center;
+      border-width: 12px 7px 0;
 
       border-style: solid;
-      border-width: 12px 7px 0;
       border-color: #fff transparent transparent;
 
       content: "";
 
-      transition: transform .3s;
+      transition: transform 0.3s;
     }
 
     &.rotate::after {
@@ -57,50 +57,46 @@
   }
 
   &__options {
+    visibility: hidden;
+    z-index: 10;
     position: absolute;
     top: calc(100% + 8px);
     left: 0;
-    z-index: 10;
-
-    width: 100%;
+    // width: 100%;
+     width: max-content;
+     interpolate-size: allow-keywords;
     max-height: 0;
-
     overflow: clip;
-
-    visibility: hidden;
-
     background-color: #c1c1c1;
     box-shadow: 0 0 10px rgb(0 0 0 / 15%);
-
-    interpolate-size: allow-keywords;
-
     transition:
-      max-height .3s,
-      visibility .3s;
+      max-height 0.3s,
+      visibility 0.3s;
   }
 
   &__options--visible {
     visibility: visible;
-    max-height: 300px;
-    overflow-y: auto;
+    // max-height: 300px;
+     max-height: max-content;
+    // overflow-y: auto;
   }
 
   &__option {
     padding: 15px 20px;
 
     color: #fff;
+    font-size: 17px;
 
     font-family: sans-serif;
-    font-size: 17px;
     letter-spacing: 1px;
-    text-transform: uppercase;
 
     list-style: none;
+    text-transform: uppercase;
     cursor: pointer;
 
     transition:
-      background-color .3s,
-      color .3s;
+      background-color 0.3s,
+      color 0.3s;
 
     @media (hover: hover) {
       &:hover {
@@ -116,8 +112,8 @@
 }
 
 .select-1 button {
-   background-color: #e41c1c;
+  background-color: #e41c1c;
 }
 .select-2 button {
-   background-color: #090cc2;
+  background-color: #090cc2;
 }
