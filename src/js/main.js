@@ -21,7 +21,6 @@ import { phoneMasks } from "./data/phoneMasks.js";
 
 import { initPreloader } from "./components/preloader.js";
 import { initBurger } from "./components/burger.js";
-import { initAppearance } from "./animations/appearance.js";
 import { initChangeTheme } from "./services/changeTheme.js";
 import { initModal } from "./components/modalManager.js";
  import { initLazySvg } from "./services/lazySvgLoader.js";
@@ -41,6 +40,10 @@ import { initDatePicker } from "./components/dataPicker.js";
 import { initCurrentYear } from "./helpers/currentYear.js";
 import { initSyncDataAttrWithText } from "./helpers/syncDataAttrWithText.js";
 import { initLongTextWatcher } from "./helpers/longTextWatcher.js";
+import { initLazyImages } from "./helpers/lazyImages.js";
+import { initTextareaResize } from "./helpers/textareaAutoResize.js";
+import { initStickyHeader } from "./services/stickyHeader.js";
+
 
 document.addEventListener("DOMContentLoaded", () => {
   console.log("The project works");
@@ -49,7 +52,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initSliders();
   initChangeTheme("#theme");
   initModal();
-  initAppearance();
   initAccordion("#faq");
   initFocusManager();
   initTabs("#tabs-1");
@@ -65,6 +67,9 @@ document.addEventListener("DOMContentLoaded", () => {
     initSyncDataAttrWithText(".footer__author", "text");
     initLongTextWatcher(".main-title__word");
      initCurrentYear();
+      initLazyImages();
+      initTextareaResize();
+      initStickyHeader();
   // initUpButton(".footer__up-button");
 
 
