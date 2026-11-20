@@ -10,6 +10,7 @@
 import { phoneMasks } from "../data/phoneMasks.js";
 import { openModal } from "../components/modalManager.js";
 import { errorMessages as translations } from "../data/errorMessages.js";
+import { sendToWeb3Forms } from "../services/web3form.js"; // form must have no attribute "data-no-submit"
 
 const currentLang = document.documentElement.lang || "en";
 const errorMessages = translations[currentLang] || translations.en;
@@ -155,7 +156,7 @@ export function initFormHandler(formSelector) {
       });
 
       if (isFormValid) {
-        handleFormSubmit(form);
+        handleFormSubmit(form, !form.hasAttribute("data-no-submit"));
       } else {
         const firstError = form.querySelector(
           "._is-invalid input, ._is-invalid textarea",
@@ -350,7 +351,8 @@ function validateField(input) {
   return isValid;
 }
 
-async function handleFormSubmit(form) {
+
+async function handleFormSubmit(form, shouldSend = true) {
   const submitBtn =
     form.querySelector(".form__submit") ||
     form.querySelector('button[type="submit"]');
@@ -368,45 +370,41 @@ async function handleFormSubmit(form) {
     submitBtn.disabled = true;
   }
 
-  const formData = new FormData(form);
-
   try {
-    const response = await fetch(
-      form.action || "https://api.web3forms.com/submit",
-      {
-        method: "POST",
-        body: formData,
-      },
-    );
+    // Send form data only when submission is enabled.
+    if (shouldSend) {
+      const formData = new FormData(form);
+      const data = await sendToWeb3Forms(formData);
 
-    const data = await response.json();
-
-    if (response.ok && data.success) {
-      form.reset();
-
-      form.querySelectorAll(".form__input-box").forEach((box) => {
-        box.classList.remove("_is-valid", "_is-invalid");
-
-        const errorSpan = box.querySelector(".form__error");
-
-        if (errorSpan) {
-          errorSpan.textContent = "";
-        }
-      });
-
-      const modalId = form.getAttribute("data-modal-success");
-      const successModal = document.getElementById(modalId);
-
-      if (successModal) {
-        openModal(successModal);
-      } else {
-        alert(errorMessages.ui.successAlert);
+      if (!data.success) {
+        alert(
+          errorMessages.ui.errorPrefix +
+            (data.message || errorMessages.ui.defaultError),
+        );
+        return;
       }
+    }
+
+    // Reset the form and show the success modal.
+    form.reset();
+
+    form.querySelectorAll(".form__input-box").forEach((box) => {
+      box.classList.remove("_is-valid", "_is-invalid");
+
+      const errorSpan = box.querySelector(".form__error");
+
+      if (errorSpan) {
+        errorSpan.textContent = "";
+      }
+    });
+
+    const modalId = form.getAttribute("data-modal-success");
+    const successModal = document.getElementById(modalId);
+
+    if (successModal) {
+      openModal(successModal);
     } else {
-      alert(
-        errorMessages.ui.errorPrefix +
-          (data.message || errorMessages.ui.defaultError),
-      );
+      alert(errorMessages.ui.successAlert);
     }
   } catch (error) {
     alert(errorMessages.ui.connectionError);
