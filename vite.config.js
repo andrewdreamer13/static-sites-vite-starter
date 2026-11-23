@@ -1,13 +1,19 @@
 /**
- * Configures Vite build tool, including base paths, HTML injection, sitemap generation, image/SVG optimization, PostCSS processing, minification, and asset bundling.
+ * Configures Vite build processes for development, standard production, GitHub Pages, and client-ready ZIP builds.
  *
- * 1. `defineConfig` - Returns the main Vite configuration dynamically based on the build mode (standard relative path or GitHub Pages subpath).
- * 2. `getHtmlFiles` - Recursively scans the build output directory to discover all HTML pages for dynamic sitemap generation.
- * 3. `generate-sitemap` (Plugin) - Automatically builds and outputs an SEO-friendly `sitemap.xml` after a successful production bundle.
- * 4. `assetFileNames` - Categorizes and routes compiled build assets (images, fonts, CSS) into organized subdirectories with hashed filenames.
+ * 1. `rootFolder` - Detects the project folder name, used to generate the GitHub Pages URL and client ZIP filename.
+ * 2. `getHtmlFiles` - Recursively scans the build output directory and collects HTML files for sitemap generation.
+ * 3. `defineConfig` - Loads mode-specific environment variables and configures base paths and the website URL.
+ * 4. `generate-sitemap` (Plugin) - Creates `sitemap.xml` after the build, using the appropriate website URL and excluding 404 pages.
+ * 5. `viteImagemin` - Optimizes raster images and SVG files during the production build.
+ * 6. `createSvgIconsPlugin` - Generates an SVG sprite from icons stored in `src/assets/icons`.
+ * 7. `ViteMinifyPlugin` - Minifies HTML, CSS, and JavaScript output.
+ * 8. `zipPack` - Creates a ZIP archive of the completed `dist` directory in client mode only.
+ * 9. `css` - Configures PostCSS with Autoprefixer and media query sorting.
+ * 10. `build` - Defines HTML entry points and organizes compiled assets into dedicated folders with hashed filenames.
  */
-// starter
-import { defineConfig } from "vite";
+
+import { defineConfig, loadEnv } from "vite";
 import path from "path";
 import fs from "fs";
 import viteImagemin from "vite-plugin-imagemin";
@@ -40,7 +46,12 @@ function getHtmlFiles(dir, baseDir = dir) {
 }
 
 export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), "");
   const isGH = mode === "github";
+
+  const siteUrl = isGH
+    ? `https://andrewdreamer13.github.io/${rootFolder}/`
+    : env.VITE_SITE_URL || "https://your-domain.com/";
 
   return {
     base: isGH ? `/${rootFolder}/` : "./",
@@ -49,8 +60,16 @@ export default defineConfig(({ mode }) => {
       injectHTML(),
       {
         name: "generate-sitemap",
+
+        transformIndexHtml: {
+          order: "pre",
+          handler(html) {
+            return html.replaceAll("%VITE_SITE_URL%", siteUrl);
+          },
+        },
+
         closeBundle() {
-          const hostname = `https://andrewdreamer13.github.io/${rootFolder}/`;
+          const hostname = siteUrl;
           const distDir = path.resolve(process.cwd(), "dist");
 
           if (!fs.existsSync(distDir)) return;
@@ -88,7 +107,16 @@ export default defineConfig(({ mode }) => {
           const outputPath = path.join(distDir, "sitemap.xml");
           fs.writeFileSync(outputPath, xml, "utf-8");
 
-          console.log("Universal Sitemap successfully generated!");
+         const robotsContent = `User-agent: *
+Allow: /
+
+Sitemap: ${hostname}sitemap.xml
+`;
+
+          const robotsPath = path.join(distDir, "robots.txt");
+          fs.writeFileSync(robotsPath, robotsContent, "utf-8");
+
+          console.log("Sitemap and robots.txt successfully generated!");
         },
       },
       viteImagemin({
@@ -138,11 +166,15 @@ export default defineConfig(({ mode }) => {
         minifyJS: true,
       }),
 
-      zipPack({
-        inDir: "dist",
-        outDir: "./",
-        outFileName: `${rootFolder}.zip`,
-      }),
+      ...(mode === "client"
+        ? [
+            zipPack({
+              inDir: "dist",
+              outDir: "./",
+              outFileName: `${rootFolder}.zip`,
+            }),
+          ]
+        : []),
     ],
 
     css: {

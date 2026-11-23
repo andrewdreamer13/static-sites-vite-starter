@@ -1,7 +1,0 @@
-# https://www.robotstxt.org/robotstxt.html
-
-User-agent: *
-Allow: /
-
-# Host & Sitemap (Replace with your client's real domain)
-Sitemap: https://your-client-domain.com/sitemap.xml

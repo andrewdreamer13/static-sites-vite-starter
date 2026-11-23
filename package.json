@@ -9,7 +9,8 @@
     "build": "node prebuild.js && vite build",
     "preview": "vite preview",
     "predeploy": "node prebuild.js && vite build --mode github",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "build:client": "node prebuild.js && vite build --mode client"
   },
   "devDependencies": {
     "autoprefixer": "^10.5.3",
